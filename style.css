@@ -1,0 +1,163 @@
+/* GENERAL */
+
+a
+{
+    color:#5d635f;
+    text-decoration:none;
+}
+
+a:hover
+{   
+    text-decoration:none;
+    color:#3f403f;
+}
+
+h1
+{
+    font-size: 1.8em;
+    text-align: center;
+}
+
+h2
+{
+    font-size: 1.4em;
+    margin-left: 5px;
+}
+
+
+/* HEADER */ 
+
+header
+{
+    border-bottom: 2px solid #FF0000;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+header .logo
+{
+    width: 75px;
+    margin-left: 150px;
+}
+
+body
+{
+    font-family: 'Open Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+main
+{
+    background-image: linear-gradient(#FFF , #a8e6e3);
+    height: 100%;
+    width: 100%;
+    padding-bottom: 15px;
+    margin: 0;
+}
+
+section
+{
+    margin: 50px 70px 10px 70px;
+}
+
+.form
+{
+    width:350px;
+    margin: auto;
+    border:1px outset black;
+    text-align: justify;
+    padding: 40px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-radius: 15px;
+    box-shadow: 6px 6px 6px grey;
+    background-color: #e3dede;
+}
+
+/*PAGE INSCRIPTION*/
+
+.required
+{
+    color:#FF0000;
+    font-weight:bold;
+}
+
+.form div{
+    display:flex;
+    justify-content: space-between;
+    margin-bottom:10px;
+}
+
+/*PRESENTATION DU GROUPE ET DES ACTEURS*/
+
+#presentation .presentationListActeurs
+{
+    display: flex;
+    justify-content: center;
+}
+
+li
+{
+    color: #FF0000;
+}
+
+.li_content
+{
+    color: #000;
+}
+
+.acteur
+{
+    
+    margin: 50px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #e3dede;
+    border:1px outset black;
+    border-radius: 15px;
+}
+
+.presentation_acteur
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logo_acteur
+{
+    width: 200px;
+    border: solid 1px #000000;
+}
+
+.description
+{
+    margin-left: 10px;
+    width: 70%;
+}
+
+.button
+{
+    align-self: flex-end;
+    white-space: nowrap;
+    background-image: linear-gradient(#ffffff ,#FF0000);
+    border-radius: 15px;
+    padding: 9px;
+    text-decoration: none;
+    color:#000000;
+    font-size: 0.9em;
+}
+
+/* FOOTER */ 
+
+footer
+{
+    background-color:#000000; 
+    text-align:center;
+    padding:7px;
+}
