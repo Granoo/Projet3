@@ -103,7 +103,7 @@ if (isset($_SESSION['id']) )
         
         <main>
             <section id="Presentation">
-            <h1>Edition du profil !</h1>
+            <h1>Edition du profil</h1>
             <div align="center"><br/>
                     <form method="POST" action="">
                         <label>Pseudo :</label>
