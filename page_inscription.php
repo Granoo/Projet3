@@ -6,7 +6,7 @@ if (isset ($_POST['forminscription']))
 	$nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
     $pseudo = htmlspecialchars($_POST['pseudo']);
-    $password = $_POST['password'];
+    $password = sha1($_POST['password']);
     $question = htmlspecialchars($_POST['question']);
     $reponse = htmlspecialchars($_POST['reponse']);
     $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hachage du mot de passe

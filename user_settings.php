@@ -89,8 +89,8 @@ if (isset($_SESSION['id']) )
                 <?php
                 if(isset($_SESSION['id']))
                 {
-                    echo 'Bonjour ton id est le ' . $_SESSION['id'] . ' et ton pseudo est ' . $_SESSION['pseudo'] . ' et ton mot de passe est ' . $_SESSION['password'];
-                ?>
+                    echo 'Bonjour '. $_SESSION['nom'] .' '. $_SESSION['prenom'].',ton id est le ' . $_SESSION['id'] . ' et ton pseudo est ' . $_SESSION['pseudo'];
+                ?><br/>
                 <div class="container-user">
                 <a href="user_settings.php"><p>👦 <?php echo $_SESSION['nom'] ?> <?php echo $_SESSION['prenom']?></p></a>
                 <a href="deconnexion.php">↪ Se déconnecter</a>
@@ -120,7 +120,7 @@ if (isset($_SESSION['id']) )
                         <input type="texte" name="newquestion" placeholder="question" value="<?php echo $user['question'];?>"/><br /><br />
                         <label>Réponse :</label>
                         <input type="texte" name="newreponse" placeholder="reponse" value="<?php echo $user['reponse'];?>"/><br /><br /><br/>
-                        <input type="submit" value="Mettre à jour" /> <br/><br/><br/>
+                        <input type="submit" value="Mettre à jour" /> <br/><br/><br/><br/><br/>
                     </form>
                     <?php if (isset($msg)) {echo $msg;}?>
             </div>
