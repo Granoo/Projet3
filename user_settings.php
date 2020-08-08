@@ -51,8 +51,8 @@ if (isset($_SESSION['id']) )
 
     if(isset($_POST['newmdp1']) AND !empty($_POST['newmdp1']) AND isset($_POST['newmdp2']) AND !empty($_POST['newmdp2']))
     {
-        $mdp1 = sha1($_POST['newmdp1']);
-        $mdp2 = sha1($_POST['newmdp2']);
+        $mdp1 = password_hash($_POST['newmdp1']);
+        $mdp2 = password_hash($_POST['newmdp2']);
 
         if ($mdp1 == $mdp2)
         {
@@ -89,7 +89,7 @@ if (isset($_SESSION['id']) )
                 <?php
                 if(isset($_SESSION['id']))
                 {
-                    echo 'Bonjour ton id est le ' . $_SESSION['id'] . ' et ton pseudo est ' . $_SESSION['pseudo'] . ' et ton mot de passe est ' . $_POST['password'];
+                    echo 'Bonjour ton id est le ' . $_SESSION['id'] . ' et ton pseudo est ' . $_SESSION['pseudo'] . ' et ton mot de passe est ' . $_SESSION['password'];
                 ?>
                 <div class="container-user">
                 <a href="user_settings.php"><p>👦 <?php echo $_SESSION['nom'] ?> <?php echo $_SESSION['prenom']?></p></a>

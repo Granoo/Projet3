@@ -9,7 +9,7 @@ if (isset ($_POST['forminscription']))
     $password = $_POST['password'];
     $question = htmlspecialchars($_POST['question']);
     $reponse = htmlspecialchars($_POST['reponse']);
-    $pass_hache = password_hash($password, PASSWORD_DEFAULT);
+    $pass_hache = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hachage du mot de passe
 
 	if (!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['pseudo']) AND !empty($_POST['password']) AND !empty($_POST['question']) AND !empty($_POST['reponse']))
 	{
