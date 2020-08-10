@@ -109,7 +109,7 @@ if (isset($_SESSION['id']) )
                         <label>Pseudo :</label>
                         <input type="texte" name="newpseudo" placeholder="pseudo" value="<?php echo $user['pseudo'];?>"/><br /><br />
                         <label>Mot de passe :</label>
-                        <input type="text" name="newmdp1" placeholder="mot de passe" value="<?php echo $user['password'];?>"/><br /><br />
+                        <input type="password" name="newmdp1" placeholder="mot de passe" /><br /><br />
                         <!-- <label>Confirmation du mot de passe :</label>
                         <input type="text" name="newmdp2" placeholder="confirmation mot de passe"/><br /><br /> -->
                         <label>Nom :</label>
