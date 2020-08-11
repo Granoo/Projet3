@@ -178,6 +178,37 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
             }
             ?>
 
+
+        <!-- Système de likes et dislikes A FINALISER 
+            <?php
+        if(isset($_GET['id']) AND !empty($_GET['id'])) {
+            $get_id = htmlspecialchars($_GET['id']);
+            $article = $bdd->prepare('SELECT * FROM articles WHERE id = ?');
+            $article->execute(array($get_id));
+            if($article->rowCount() == 1) {
+                $article = $article->fetch();
+                $id = $article['id'];
+                $titre = $article['titre'];
+                $contenu = $article['contenu'];
+                $likes = $bdd->prepare('SELECT id FROM likes WHERE id_article = ?');
+                $likes->execute(array($id));
+                $likes = $likes->rowCount();
+                $dislikes = $bdd->prepare('SELECT id FROM dislikes WHERE id_article = ?');
+                $dislikes->execute(array($id));
+                $dislikes = $dislikes->rowCount();
+            } else {
+                die('Cet article n\'existe pas !');
+            }
+        } else {
+            die('Erreur');
+        }
+        ?>
+
+        <p><a href="action.php?t=1&id=<?= $id ?>">J'aime</a> (<?= $likes ?>)</p>
+        <br />
+        <p><a href="action.php?t=2&id=<?= $id ?>">Je n'aime pas</a> (<?= $dislikes ?></p>
+        A FINALISER -->
+
     	</section>
         
 	</main>
