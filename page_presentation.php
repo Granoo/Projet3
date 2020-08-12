@@ -183,17 +183,17 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
             <?php
         if(isset($_GET['id']) AND !empty($_GET['id'])) {
             $get_id = htmlspecialchars($_GET['id']);
-            $article = $bdd->prepare('SELECT * FROM articles WHERE id = ?');
-            $article->execute(array($get_id));
-            if($article->rowCount() == 1) {
-                $article = $article->fetch();
-                $id = $article['id'];
-                $titre = $article['titre'];
-                $contenu = $article['contenu'];
-                $likes = $bdd->prepare('SELECT id FROM likes WHERE id_article = ?');
+            $acteur = $bdd->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
+            $acteur->execute(array($get_id));
+            if($acteur->rowCount() == 1) {
+                $acteur = $acteur->fetch();
+                $id = $acteur['id_acteur'];
+                $titre = $acteur['acteur'];
+                $contenu = $acteur['description'];
+                $likes = $bdd->prepare('SELECT id_acteur FROM vote WHERE id_acteur = ?');
                 $likes->execute(array($id));
                 $likes = $likes->rowCount();
-                $dislikes = $bdd->prepare('SELECT id FROM dislikes WHERE id_article = ?');
+                $dislikes = $bdd->prepare('SELECT id_acteur FROM vote WHERE id_acteur = ?');
                 $dislikes->execute(array($id));
                 $dislikes = $dislikes->rowCount();
             } else {
@@ -207,6 +207,10 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
         <p><a href="action.php?t=1&id=<?= $id ?>">J'aime</a> (<?= $likes ?>)</p>
         <br />
         <p><a href="action.php?t=2&id=<?= $id ?>">Je n'aime pas</a> (<?= $dislikes ?></p>
+
+        // Compte combien il y a de Likes et des Dislikes à l'acteur
+        $like = countWhereAnd('countLike', 'vote', 'id_acteur', 'vote', $id, 1);
+        $dislike = countWhereAnd('countDislike', 'vote', 'id_acteur', 'vote', $id, 2);
         A FINALISER -->
 
     	</section>
