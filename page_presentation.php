@@ -65,6 +65,34 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
 
 
     	<!--Présentation des acteurs-->
+        <section>
+            <?php
+            $reponse=$bdd->query('SELECT * FROM acteur');
+
+
+            while ($donnees = $reponse->fetch())
+            {   ?>
+                <p>
+
+                <?php
+                echo $donnees['acteur'];
+                ?>
+                <br>
+                <a href="display_details.php?idacteur=<?php echo $donnees['id_acteur']; ?>">Lire la suite</a>
+                </p>
+
+                <p>
+
+<img src="img/<?php echo $donnees['logo']; ?>">
+                </p>
+                <?php
+            }
+
+
+             ?>
+
+
+        </section>
 
     	<section id="acteur">
     	   <h2>Présentation des acteurs</h2>
