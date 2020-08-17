@@ -9,7 +9,6 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
     $requser = $bdd->prepare('SELECT * FROM visiteurs WHERE id= ?');
     $requser->execute(array($getid));
     $userinfo = $requser->fetch();
-
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +36,7 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
                 <?php
                 }
                 ?>
-                
+
         </header>
 
 
@@ -60,23 +59,19 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
                     </ul>
                 </div>
 
-        <p>Le GBAF est le représentant de la profession bancaire et des assureurs sur tous  les axes de la réglementation financière française. Sa mission est de promouvoir  l'activité bancaire à l’échelle nationale. C’est aussi un interlocuteur privilégié des pouvoirs publics.  </p>
+        <p>Le GBAF est le représentant de la profession bancaire et des assureurs sur tous  les axes de la réglementation financière française. Sa mission est de promouvoir  l'activité bancaire à l’échelle nationale. C’est aussi un interlocuteur privilégié des pouvoirs publics.  </p><br/>
+        <h2>Présentation des acteurs</h2>
     	</section>
-
 
     	<!--Présentation des acteurs-->
 
-    	<section id="acteur">
-    	   <h2>Présentation des acteurs</h2>
-    	       <?php $reponse=$bdd->query('SELECT * FROM acteur');
+        <?php $reponse=$bdd->query('SELECT * FROM acteur');
                                 while ($donnees = $reponse->fetch())
-                                {   ?>
-
+                                {   ?><section id="acteur">
+           
                 <div id="conteneur_acteur">
                     <div class="acteur">
                         <div class="presentation_acteur">
-    
-
                                 <figure>
                                 <img class="logo_acteur" src="img/<?php echo $donnees['logo']; ?>" alt="logo_acteur">
                                 </figure>
