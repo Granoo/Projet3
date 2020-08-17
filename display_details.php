@@ -31,9 +31,37 @@ $bdd = new PDO('mysql:host=localhost;dbname=gbaf','root','');
                 }
                 ?>
         </header>
+
+            <!-- Affichage des données de l'acteur -->
+
+    <section id="acteur">
+           <h2><?= $donnees['acteur'] ?></h2>
+               <?php $reponse=$bdd->query('SELECT * FROM acteur');
+                                while ($donnees = $reponse->fetch())
+                                {   ?>
+
+                <div id="conteneur_acteur">
+                    <div class="acteur">
+                        <div class="presentation_acteur">
+    
+
+                                <figure>
+                                <img class="logo_acteur" src="img/<?php echo $donnees['logo']; ?>" alt="logo_acteur">
+                                </figure>
+                                <h2><?= $donnees['acteur'] ?></h2>
+                                <p><?= $donnees['description'] ?></p>
+                        
+                        </div>
+                    </div>
+                </div>
+
+        </section>
     </body>
 
     <footer>
             <p><a href="#">Mentions légales</a> | <a href="#">Contact</a></p>
     </footer>
 </html>
+<?php
+}
+?>
