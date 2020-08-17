@@ -65,100 +65,30 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
 
 
     	<!--Présentation des acteurs-->
-        <section>
-            <?php
-            $reponse=$bdd->query('SELECT * FROM acteur');
-
-
-            while ($donnees = $reponse->fetch())
-            {   ?>
-                <p>
-
-                <?php
-                echo $donnees['acteur'];
-                ?>
-                <br>
-                <a href="display_details.php?idacteur=<?php echo $donnees['id_acteur']; ?>">Lire la suite</a>
-                </p>
-
-                <p>
-
-<img src="img/<?php echo $donnees['logo']; ?>">
-                </p>
-                <?php
-            }
-
-
-             ?>
-
-
-        </section>
 
     	<section id="acteur">
     	   <h2>Présentation des acteurs</h2>
-    	       <div id="conteneur_acteur">
-                    <div class="acteur">
-                        <div class="presentation_acteur">
-                            <figure>
-                            <img class="logo_acteur" src="img/formation_co.png" alt="logo_acteur">
-                            </figure>
-                            <figcaption hidden>Logo de Formation&co</figcaption>
-                        <div class="description">
-                            <h3>FORMATION & CO</h3>
-                            <p>Formation & co est une association française présente sur tout le territoire.</p>
-                        </div>
-                        </div>
-                        <a class="button" href="#">Lire la suite</a>   
-                    </div>
-                </div>
+    	       <?php $reponse=$bdd->query('SELECT * FROM acteur');
+                                while ($donnees = $reponse->fetch())
+                                {   ?>
 
                 <div id="conteneur_acteur">
                     <div class="acteur">
                         <div class="presentation_acteur">
-                            <figure>
-                            <img class="logo_acteur" src="img/protectpeople.png" alt="logo_acteur">
-                            </figure>
-                            <figcaption hidden>Logo de Protect People</figcaption>
-                        <div class="description">
-                            <h3>PROTECT PEOPLE</h3>
-                            <p>Chez Protect People, chacun cotise selon ses moyens et reçoit selon ses besoins.</p>
-                        </div>
-                        </div>
-                        <a class="button" href="#">Lire la suite</a>   
-                    </div>
-                </div>
+    
 
-                <div id="conteneur_acteur">
-                    <div class="acteur">
-                        <div class="presentation_acteur">
-                            <figure>
-                            <img class="logo_acteur" src="img/Dsa_france.png" alt="logo_acteur">
-                            </figure>
-                            <figcaption hidden>Logo de Dsa France</figcaption>
-                        <div class="description">
-                            <h3>DSA FRANCE</h3>
-                            <p>Dsa France accélère la croissance du territoire et s'engage avec les collectivités territoriales.</p>
+                                <figure>
+                                <img class="logo_acteur" src="img/<?php echo $donnees['logo']; ?>" alt="logo_acteur">
+                                </figure>
+                        <div class="description"><h3><?php echo $donnees['acteur'];?></h3></div>
                         </div>
-                        </div>
-                        <a class="button" href="#">Lire la suite</a>   
+                        <a class="button" href="display_details.php?idacteur=<?php echo $donnees['id_acteur']; ?>">Lire la suite</a>
                     </div>
                 </div>
+        </section>
 
-                <div id="conteneur_acteur">
-                    <div class="acteur">
-                        <div class="presentation_acteur">
-                            <figure>
-                            <img class="logo_acteur" src="img/CDE.png" alt="logo_acteur">
-                            </figure>
-                            <figcaption hidden>Logo de CDE</figcaption>
-                        <div class="description">
-                            <h3>CHAMBRE DES ENTREPRENEURS CDE</h3>
-                            <p>La CDE accompagne les entreprises dans leurs démarches de formation.</p>
-                        </div>
-                        </div>
-                        <a class="button" href="#">Lire la suite</a>   
-                    </div>
-                </div>
+                <?php } ?>
+                
 
         <!-- PHP de la partie commentaire-->
 
