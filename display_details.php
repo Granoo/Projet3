@@ -54,9 +54,23 @@ $bdd = new PDO('mysql:host=localhost;dbname=gbaf','root','');
                         </div>
                     </div>
                 </div>
-                
 
+            <!-- Affichage de la partie commentaire-->
 
+            <br />
+            <h2>Commentaires:</h2>
+            <form method="POST">
+                <input type="text" name="pseudo" placeholder="Votre pseudo" /><br />
+                <textarea name="commentaire" placeholder="Votre commentaire..."></textarea><br />
+                <input type="submit" value="Poster mon commentaire" name="submit_commentaire" />
+            </form>
+            <?php if(isset($c_msg)) { echo $c_msg; } ?>
+            <br /><br />
+            <!--<?php //while($c = $commentaires->fetch()) { ?>
+                <b><?= $c['pseudo'] ?>:</b> <?= $c['commentaire'] ?><br />-->
+            <?php } ?>
+            
+            
             <!-- PHP de la partie commentaire-->
 
         <?php
@@ -84,24 +98,39 @@ $bdd = new PDO('mysql:host=localhost;dbname=gbaf','root','');
             $commentaires->execute(array($getid));
         ?>
 
-        <!-- Affichage de la partie commentaire-->
-
-            <p><?= $acteur['contenu'] ?></p>
-            <br />
-            <h2>Commentaires:</h2>
-            <form method="POST">
-                <input type="text" name="pseudo" placeholder="Votre pseudo" /><br />
-                <textarea name="commentaire" placeholder="Votre commentaire..."></textarea><br />
-                <input type="submit" value="Poster mon commentaire" name="submit_commentaire" />
-            </form>
-            <?php if(isset($c_msg)) { echo $c_msg; } ?>
-            <br /><br />
-            <?php while($c = $commentaires->fetch()) { ?>
-                <b><?= $c['pseudo'] ?>:</b> <?= $c['commentaire'] ?><br />
-            <?php } ?>
+        <!-- Système de likes et dislikes A FINALISER 
             <?php
+        if(isset($_GET['id']) AND !empty($_GET['id'])) {
+            $get_id = htmlspecialchars($_GET['id']);
+            $acteur = $bdd->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
+            $acteur->execute(array($get_id));
+            if($acteur->rowCount() == 1) {
+                $acteur = $acteur->fetch();
+                $id = $acteur['id_acteur'];
+                $titre = $acteur['acteur'];
+                $contenu = $acteur['description'];
+                $likes = $bdd->prepare('SELECT id_acteur FROM vote WHERE id_acteur = ?');
+                $likes->execute(array($id));
+                $likes = $likes->rowCount();
+                $dislikes = $bdd->prepare('SELECT id_acteur FROM vote WHERE id_acteur = ?');
+                $dislikes->execute(array($id));
+                $dislikes = $dislikes->rowCount();
+            } else {
+                die('Cet article n\'existe pas !');
             }
-            ?>
+        } else {
+            die('Erreur');
+        }
+        ?>
+
+        <p><a href="action.php?t=1&id=<?= $id ?>">J'aime</a> (<?= $likes ?>)</p>
+        <br />
+        <p><a href="action.php?t=2&id=<?= $id ?>">Je n'aime pas</a> (<?= $dislikes ?></p>
+
+        // Compte combien il y a de Likes et des Dislikes à l'acteur
+        $like = countWhereAnd('countLike', 'vote', 'id_acteur', 'vote', $id, 1);
+        $dislike = countWhereAnd('countDislike', 'vote', 'id_acteur', 'vote', $id, 2);
+        A FINALISER -->
 
         </section>
     </body>
