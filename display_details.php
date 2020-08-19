@@ -72,6 +72,32 @@ $bdd = new PDO('mysql:host=localhost;dbname=gbaf','root','');
             
             
             
+            <!-- PHP de la partie commentaire-->
+
+        <?php
+            if(isset($_GET['id']) AND !empty($_GET['id'])) {
+                $getid = htmlspecialchars($_GET['id']);
+                $acteur = $bdd->prepare('SELECT * FROM acteur WHERE id = ?');
+                $acteur->execute(array($getid));
+                $acteur = $acteur->fetch();
+                if(isset($_POST['submit_commentaire'])) {
+                    if(isset($_POST['pseudo'],$_POST['commentaire']) AND !empty($_POST['pseudo']) AND !empty($_POST['commentaire'])) {
+                        $pseudo = htmlspecialchars($_POST['pseudo']);
+                        $commentaire = htmlspecialchars($_POST['commentaire']);
+                        if(strlen($pseudo) < 25) {
+                        $ins = $bdd->prepare('INSERT INTO post (id_user, id_acteur, date_add, post) VALUES (?,?,NOW(),?)');
+                        $ins->execute(array($pseudo,$commentaire,$getid));
+                        $c_msg = "<span style='color:green'>Votre commentaire a bien été posté</span>";
+                    } else {
+                        $c_msg = "Erreur: Le pseudo doit faire moins de 25 caractères";
+                    }
+                } else {
+                    $c_msg = "Erreur: Tous les champs doivent être complétés";
+                }
+            }
+            $commentaires = $bdd->prepare('SELECT * FROM post WHERE id_acteur = ? ORDER BY id DESC');
+            $commentaires->execute(array($getid));
+        ?>
 
         <!-- Système de likes et dislikes A FINALISER 
             <?php
