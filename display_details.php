@@ -1,14 +1,24 @@
 <?php
 session_start();
 
-$bdd = new PDO('mysql:host=localhost;dbname=gbaf','root','');
+try
+{
+    // On se connecte à MySQL
+    $bdd = new PDO('mysql:host=localhost;dbname=gbaf;charset=utf8', 'root', '');
+}
+catch(Exception $e)
+{
+    // En cas d'erreur, on affiche un message et on arrête tout
+        die('Erreur : '.$e->getMessage());
+}
+
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html langue="fr">
     <head>
-        <meta charset="utf-8"/>
+        <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
         <link rel="stylesheet" href="style.css"/>
         <link rel="shortcut icon" href="img/gbaf.png" type="image/x-icon">
         <title>GBAF | Acteurs</title>
@@ -36,10 +46,11 @@ $bdd = new PDO('mysql:host=localhost;dbname=gbaf','root','');
 
     <section id="acteur">
            <h2></h2>
-               <?php $reponse=$bdd->query('SELECT * FROM acteur');
-                                while ($donnees = $reponse->fetch())
-                                {   ?>
-
+               <?php
+                $req = $bdd->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
+                $req->execute(array($_GET['idacteur']));
+                $donnees=$req->fetch();
+                ?>
                 <div id="conteneur_acteur">
                     <div class="acteur">
                         <div class="presentation_acteur">
@@ -68,7 +79,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=gbaf','root','');
             <br /><br />
             <!--<?php //while($c = $commentaires->fetch()) { ?>
                 <b><?= $c['pseudo'] ?>:</b> <?= $c['commentaire'] ?><br />-->
-            <?php } ?>
+            
             
             
             
