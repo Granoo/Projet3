@@ -110,69 +110,6 @@ catch(Exception $e)
             $commentaires->execute(array($getid));
         ?>
 
-            <!--Fonctions de chargement des commentaires A REVOIR-->
-
-    <?php
-    function commentaires($url, $id_commentaire=0)
-    {
-        global $db;
-    
-        $i=0;
-        $commentaires = '';
-        $tcolor = ['blue','green','orange','purple','gray','red'];
-        
-        $sql = "SELECT id_commentaire, nom, commentaire, email, date FROM p3x_commentaire WHERE actif='y' AND url=".$db->quote($url);
-        if($id_commentaire!=0){ $sql .= " AND id_sous_commentaire=".$id_commentaire; }else{ $sql .= " AND id_sous_commentaire=0"; }
-        $sql .= " ORDER BY id_sous_commentaire, date";
-        
-        foreach($db->query($sql) as $data) {
-            $i++;
-            mt_srand(crc32($data['email']));
-            
-            $commentaires .= '<div class="box-light">';
-                
-                if($i==1 && $id_commentaire==0)
-                {
-                    $sql2 = "SELECT COUNT(id_commentaire) FROM p3x_commentaire WHERE actif='y' AND url=".$db->quote($url);
-                    $query = $db->prepare($sql2); 
-                    $query->execute(); 
-                    $row = $query->fetch();
-                    $count = $row[0];
-                    $nb = $count;
-                    $s='s';
-                    
-                    if($count==1){ $nb = 'Un'; }
-                    
-                    $commentaires .= '<h2>'.$nb.' commentaire'.$s.'</h2>';
-                }
-                
-                $commentaires .= '<div class="separator"></div>
-                                    <div class="box-light">
-                                        <div class="letter '.$tcolor[mt_rand(0, count($tcolor) - 1)].'">'.htmlentities(substr($data['nom'], 0, 1)).'</div>
-                                        <p class="chapeau">@'.htmlentities($data['nom']).' <span class="gray">'.$data['date'].'</span></p>
-                                        <p>'.htmlentities($data['commentaire']).'</p>
-                                        <form id="comform-'.$data['id_commentaire'].'" method="post" action="'.$url.'">
-                                            <input name="action" value="poster-commentaire" type="hidden">
-                                            <input name="email" class="hidden" type="text">
-                                            <input name="id_sous_commentaire" value="'.$data['id_commentaire'].'" type="hidden">
-                                            <div id="comform-div-'.$data['id_commentaire'].'" class="comform-div hidden">
-                                                <p>Réponse à @'.htmlentities($data['nom']).'<br><textarea name="commentaire"></textarea></p>
-                                                <p>Nom<br><input name="nom" type="text"></p>
-                                                <p>Adresse e-mail<br><input name="emailtrue" type="text"></p>
-                                            </div>
-                                            <div class="clear"></div>
-                                            <p><a class="repondre" data-rel="'.$data['id_commentaire'].'" href="#">Répondre</a></p>
-                                            <div class="clear"></div>
-                                        </form>
-                                    </div>';
-                
-                $commentaires .= commentaires($url, $data['id_commentaire']);
-                
-            $commentaires .= '</div>';
-        }
-        
-        return $commentaires;
-    } ?>
 
         <!-- Système de likes et dislikes A FINALISER 
             <?php
